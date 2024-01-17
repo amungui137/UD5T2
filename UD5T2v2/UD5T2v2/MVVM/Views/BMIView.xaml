@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:gauge="clr-namespace:Syncfusion.Maui.Gauges;assembly=Syncfusion.Maui.Gauges"
+             x:Class="UD5T2v2.MVVM.Views.BMIView"
+             Title="BMIView"
+             xmlns:viewmodels="clr-namespace:UD5T2v2.MVVM.ViewModels">
+
+    <ContentPage.BindingContext>
+        <viewmodels:BMIViewModel/>
+        <!-- Configuramos el contexto de datos para que sea un objeto de la clase BMIViewModel -->
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <ScrollView.Background>
+            <LinearGradientBrush EndPoint="0,1">
+                <GradientStop Offset="0.0" Color="#572375"/>
+                <GradientStop Offset="1" Color="#a594f9"/>
+            </LinearGradientBrush>
+        </ScrollView.Background>
+
+        <VerticalStackLayout Spacing="25" Padding="30,0" VerticalOptions="Center">
+
+            <!-- SECCION ALTURA -->
+            <Frame>
+                <VerticalStackLayout>
+                    <Label Text="Altura (cm)" FontSize="Large" TextColor="Gray" HorizontalOptions="Center"/>
+                    <gauge:SfLinearGauge Margin="0,15,0,0" Interval="50" Maximum="250" Minimum="25">
+                        <gauge:SfLinearGauge.MarkerPointers>
+                            <gauge:LinearContentPointer
+                                x:Name="ptrAltura"
+                                IsInteractive="True"
+                                Position="Cross"
+                                Value="{Binding BMI.Altura, Mode=TwoWay}">
+                                <!-- Bind el valor del control con la propiedad Altura del modelo -->
+                                <gauge:LinearContentPointer.Content>
+                                    <Grid HeightRequest="25" WidthRequest="50" BackgroundColor="LightGray">
+                                        <RoundRectangle CornerRadius="5" BackgroundColor="#ff0074E3"></RoundRectangle>
+                                        <Label Text="{Binding Value, Source={x:Reference ptrAltura}, StringFormat='{0:0}'}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                        <!-- Bind el Text del Label con el valor del control y aplicamos formato para mostrar solo enteros -->
+                                    </Grid>
+                                </gauge:LinearContentPointer.Content>
+                            </gauge:LinearContentPointer>
+                        </gauge:SfLinearGauge.MarkerPointers>
+                    </gauge:SfLinearGauge>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- SECCION PESO -->
+            <Frame>
+                <VerticalStackLayout>
+                    <Label Text="Peso (Kg)" TextColor="Gray" FontSize="Large" HorizontalOptions="Center"/>
+                    <gauge:SfLinearGauge Margin="0,15,0,0" Maximum="150" Minimum="50">
+                        <gauge:SfLinearGauge.MarkerPointers>
+                            <gauge:LinearContentPointer
+                                x:Name="ptrPeso"
+                                IsInteractive="True"
+                                Position="Cross"
+                                Value="{Binding BMI.Peso, Mode=TwoWay}">
+                                <!-- Bind el valor del control con la propiedad Peso del modelo -->
+                                <gauge:LinearContentPointer.Content>
+                                    <Grid HeightRequest="25" WidthRequest="50" BackgroundColor="LightGray">
+                                        <RoundRectangle CornerRadius="5" BackgroundColor="#ff0074E3"></RoundRectangle>
+                                        <Label Text="{Binding Value, Source={x:Reference ptrPeso}, StringFormat='{0:0}'}" TextColor="White" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                        <!-- Bind el Text del Label con el valor del control y aplicamos formato para mostrar solo enteros -->
+                                    </Grid>
+                                </gauge:LinearContentPointer.Content>
+                            </gauge:LinearContentPointer>
+                        </gauge:SfLinearGauge.MarkerPointers>
+                    </gauge:SfLinearGauge>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- SECCION RESULTADOS -->
+            <Frame>
+                <VerticalStackLayout>
+                    <Label Text="{Binding BMI.ResultadoBMI}" HorizontalOptions="Center" FontSize="Title"/>
+                    <!-- Bind el Text del Label con la propiedad ResultadoBMI del modelo -->
+                    <gauge:SfRadialGauge Margin="0, -50, 0, -50">
+                        <!-- Resto del código para SfRadialGauge -->
+                        <gauge:RadialAxis
+                            Maximum="50"
+                            Minimum="0"
+                            ShowAxisLine="False"
+                            ShowLabels="False"
+                            ShowTicks="False">
+                            <gauge:RadialAxis.Ranges>
+                                <!-- Definición de rangos en el RadialAxis -->
+                                <gauge:RadialRange
+                                    StartValue="0"
+                                    StartWidth="0.65"
+                                    EndValue="16"
+                                    EndWidth="0.65"
+                                    WidthUnit="Factor"
+                                    Fill="#282E5A">
+                                </gauge:RadialRange>
+
+                                <gauge:RadialRange
+                                    StartValue="16"
+                                    StartWidth="0.65"
+                                    EndValue="17"
+                                    EndWidth="0.65"
+                                    WidthUnit="Factor"
+                                    Fill="#616FD9">
+                                </gauge:RadialRange>
+
+                                <gauge:RadialRange
+                                    StartValue="17"
+                                    StartWidth="0.65"
+                                    EndValue="18.5"
+                                    EndWidth="0.65"
+                                    WidthUnit="Factor"
+                                    Fill="#418B45">
+                                </gauge:RadialRange>
+
+                                <gauge:RadialRange
+                                    StartValue="18.5"
+                                    StartWidth="0.65"
+                                    EndValue="25"
+                                    EndWidth="0.65"
+                                    WidthUnit="Factor"
+                                    Fill="#A9DF51">
+                                </gauge:RadialRange>
+
+                                <gauge:RadialRange
+                                    StartValue="25"
+                                    StartWidth="0.65"
+                                    EndValue="30"
+                                    EndWidth="0.65"
+                                    WidthUnit="Factor"
+                                    Fill="#F68F30">
+                                </gauge:RadialRange>
+
+                                <gauge:RadialRange
+                                    StartValue="30"
+                                    StartWidth="0.65"
+                                    EndValue="35"
+                                    EndWidth="0.65"
+                                    WidthUnit="Factor"
+                                    Fill="#D35E5B">
+                                </gauge:RadialRange>
+
+                                <gauge:RadialRange
+                                    StartValue="35"
+                                    StartWidth="0.65"
+                                    EndValue="40"
+                                    EndWidth="0.65"
+                                    WidthUnit="Factor"
+                                    Fill="#c21913">
+                                </gauge:RadialRange>
+
+                                <gauge:RadialRange
+                                    StartValue="40"
+                                    StartWidth="0.65"
+                                    EndValue="50"
+                                    EndWidth="0.65"
+                                    WidthUnit="Factor"
+                                    Fill="#690b08">
+                                </gauge:RadialRange>
+
+                                <gauge:RadialRange
+                                    StartValue="0"
+                                    StartWidth="0.15"
+                                    EndValue="99"
+                                    EndWidth="0.15"
+                                    WidthUnit="Factor"
+                                    Fill="#4D9b9b9b"
+                                    OffsetUnit="Factor"
+                                    RangeOffset="0.63"
+                                    >
+                                </gauge:RadialRange>
+                            </gauge:RadialAxis.Ranges>
+                            <gauge:RadialAxis.Pointers>
+                                <gauge:NeedlePointer
+                                    x:Name="ptrAguja"
+                                    KnobRadius="15"
+                                    KnobSizeUnit="Pixel"
+                                    NeedleEndWidth="15"
+                                    NeedleLength="0.6"
+                                    NeedleStartWidth="2"
+                                    Value="{Binding BMI.Resultado}"/>
+                                <!-- Bind el valor del control con la propiedad Resultado del modelo -->
+                            </gauge:RadialAxis.Pointers>
+                        </gauge:RadialAxis>
+                    </gauge:SfRadialGauge>
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
